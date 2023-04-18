@@ -1,0 +1,22 @@
+The program will be made of many, many structures that must be well organized.
+
+The game will have:
+
+A controller (Which will be interesting, a CLI controller),
+A storage system with an input, output, and UI (CLI, of course)
+An inventory to store machines not in use, I'm pretty sure it can be seperate like the storage system.
+A file system that can save and load information. It will need to save different machines with different parts, although I'm pretty sure the parts can just be a few words in plain text or even less in binary data. It might be a good idea to learn how to read/write binary data.
+A marketplace, though I don't need to make a dynamic markeplace right now but it would be cool to have
+A parts store who restocks every day. You can sell the coins you get from the marketplace here.
+A permit office that will allow you to buy more advanced machinery. You can sell the coins you get from the marketplace here.
+A machine dealership that will sell new base level machinery. You can sell the coins you get from the marketplace here.
+A machine co-op that sells randomized machinery. You can sell the coins you get from the marketplace here.
+The co-op will also have a Bounty Board, where you can get coins for completing certain things.
+
+The game will consist of managing your inventory, managing the machines, exchanging parts, selling goods and buying things. I might end up creating some sort of end goal, but that's not quite as important atm.
+
+If I start with the storage system, then I'll have a foundation to build the machines on, the marketplace on, and will help me describe the save system.
+
+If I start with the controller, then I won't have a foundation as much as I'd have an access point, which is also very needed. However, many aspects of the controller requires the foundations (How do I know what "sell" is if I have nothing to sell or anything to sell it to?). That's OK though, as fabricating the basics of the controller will allow expansion as the system grows.
+
+If I set up the controller to access the storage system as my first few steps, then I'll have a good foundation for the rest of the system as well as a good access structure to build upon. Sounds like a good start.

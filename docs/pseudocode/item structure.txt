@@ -1,0 +1,25 @@
+class Vault
+{
+    std::vector<std::unique_ptr<Slots>> Slots;
+
+    //  How many slots does a vault allow? A max
+    int Capacity
+
+    // Need a way to push back a new slot
+    void new_Slot(ItemStack)
+
+    // Two different slot initializers
+    void new_Slot(ItemType)
+
+    // Slots contain Itemstacks &/or Itemtypes, which means you can empty a Slot's Itemstack, and it still exists.
+
+}
+
+class Slot
+{
+    // ItemType is an enum, so it can't be a pointer
+    ItemType Type
+
+    // But ItemStacks are classes that can potentially not exist, so
+    std::shared_ptr<ItemStack>
+}

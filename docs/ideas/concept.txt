@@ -1,0 +1,6 @@
+Cyberduction is this concept:
+A bunch of different machines that do different things (so far I have thought of basic resource gathering), and can be upgraded with different parts. The parts are updated every day, and they are bought using the coins you get from selling things, which you get by running your machines. The better the parts your machine has, the more stuff you get/the faster you get it. I want more production facilities as well, so you can turn your ores into metals and crops into food.
+
+I wish to begin with a few ground ideas before I even make the first machine or how the machines are made. no SFML or SDL, that's graphics and I just wanna make stuff. The parts are going to be the things generated randomly every day, so... yeah. Not quite as exciting but anyways. The machines will put their goods in a storage, which isn't going to be owned by the player object. The store will be its own system, the machines will each be their own system, the storage will be its own system.
+The player object might not even exist, as there isn't anything I can think of that "requires" a player.
+

@@ -1,0 +1,23 @@
+Items and itemtypes are saved in a text file, associated by a map.
+
+What is special about using enum types? 
+
+Itemstack(item) item is looked up in the dictionary, and the corresponding itemType is assigned
+
+If the dictionary is dynamically created, it will be a map of <item, itemtype>. To create the map, it will be made in the manner of "string" : "string," which is vector<"itemname"> and vector<"typename">
+
+For Item_C.size()
+{
+    map.push_back(pair("item", "type"))
+}
+
+... Using .json to load the map. That doesn't allow dynamic type creation though...
+
+vector<string> itemnames
+vector<string> itemtypes
+map<string, string> itemmap
+itemnames are loaded once, itemtypes are loaded once, map is loaded once.
+
+Load from json to a vector
+
+
