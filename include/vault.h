@@ -7,7 +7,6 @@
 
 class Vault_C
 {
-    friend class cereal::access;
 public:
 
     void add_Slot(std::shared_ptr<Slot_C> slot);
@@ -26,12 +25,6 @@ public:
 
 private:
     std::vector<std::shared_ptr<Slot_C>> Slots;
-
-    template <class Archive>
-    void serialize( Archive & archive )
-    {
-        archive( Slots );
-    };
 
 };
 

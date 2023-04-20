@@ -1,11 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 #include "vault.h"
-#include "storage.h"
 
 class Game_C
 {
-    friend class cereal::access;
 public:
 
     Game_C() {;};

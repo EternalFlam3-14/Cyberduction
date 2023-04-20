@@ -28,12 +28,10 @@ void ItemStack_C::increase_Stack(std::shared_ptr<ItemStack_C> &inStack)
 {
     if (inStack->get_Type() == Type)
     {
-        std::cout << "Same Type" << std::endl;
         Count += inStack->stack_Size();
     }
     else if (!Type.size())
     {
-        std::cout << "New Item" << std::endl;
         Count = inStack->stack_Size();
         Type = inStack->get_Type();
     }

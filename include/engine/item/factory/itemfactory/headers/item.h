@@ -2,17 +2,13 @@
 #define ITEM_H
 
 #include <string>
-
-#include <cereal/access.hpp>
-#include <cereal/types/string.hpp>
-
+#include <memory>
 
 #include "itemenum.h"
 
 
 class ItemStack_C
 {
-    friend class cereal::access;
 public:
     ItemStack_C() : Count(0) {};
     ItemStack_C(std::string item, int count) : Item(item), Count(count) { set_Type(); };
@@ -32,12 +28,6 @@ private:
     std::string Type;
 
     void set_Type();
-
-    template <class Archive>
-    void serialize( Archive & archive )
-    {
-        archive( Count, Item, Type );
-    };
 
 };
 

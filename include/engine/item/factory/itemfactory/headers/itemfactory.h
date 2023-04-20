@@ -1,10 +1,8 @@
 #ifndef ITEMFACTORY_H
 #define ITEMFACTORY_H
 
-#include <map>
-#include <string>
-
 #include "item.h"
+#include "mapfactory.h"
 
 class ItemFactory_C
 {

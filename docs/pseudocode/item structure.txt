@@ -1,6 +1,6 @@
 class Vault
 {
-    std::vector<std::unique_ptr<Slots>> Slots;
+    std::vector<std::shared_ptr<Slots>> Slots;
 
     //  How many slots does a vault allow? A max
     int Capacity

@@ -1,8 +1,5 @@
 #ifndef ITEMENUM_H
 #define ITEMENUM_H
-#include <map>
-#include <vector>
-#include <string>
 
 // std::vector<std::string> ItemName
 // {

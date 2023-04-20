@@ -19,19 +19,20 @@ include_directories(
     ${ENGINE_ITEM_DIR}
 )
 
-add_subdirectory(${CEREAL_DIR})
 add_subdirectory(${ENGINE_ITEM_DIR})
 
 aux_source_directory(${SOURCE_DIR}  DIR_SRCS)
 
 add_executable(${PROJECT_NAME} ${DIR_SRCS})
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                   ${MODS_DIR} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/config
-            )
+if (NOT EXISTS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/saves)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory(${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/saves)
+)
+endif()
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E make_directory
-                   ${MODS_DIR} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/saves 
-            )
+if (NOT EXISTS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/data)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory(${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/data)
+)
+endif()

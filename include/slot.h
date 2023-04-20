@@ -5,8 +5,6 @@
 
 class Slot_C
 {
-    friend class cereal::access;
-
 public:
 
     Slot_C() {;};
@@ -24,12 +22,6 @@ private:
 
     std::string Type;
     std::shared_ptr<ItemStack_C> Stack;
-
-    template <class Archive>
-    void serialize( Archive & archive )
-    {
-        archive( Type, Stack );
-    };
 
 };
 #endif
