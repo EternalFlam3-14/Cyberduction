@@ -12,8 +12,11 @@ public:
 
     MapFactory_C() {;};
 
+    // Loads the Item/Type map
+    // Returns true if load succeded, returns false if load failed
     bool load();
 
+    const std::map<std::string, std::string> Map() const { return TypeMap; };
 
 private:
 
@@ -24,7 +27,7 @@ private:
     std::map <std::string, std::string> build_Map(Cereal::Object* TypeMap, std::vector<std::vector<std::string>> ItemArrays);
 
     // Internal check method used to verify the map isn't missing anything
-    bool has_Error(std::map <std::string, std::string> ItemTypeMap, std::vector<std::vector<std::string>> ItemArrays);
+    bool check_Error(std::map <std::string, std::string> ItemTypeMap, std::vector<std::vector<std::string>> ItemArrays);
 
     std::string Filename = "config/item.db";
 

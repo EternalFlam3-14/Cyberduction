@@ -1,16 +1,21 @@
-#include <random>
-#include <iostream>
+#include "item.h"
 
-void Itemise()
+
+void ItemStack_C::increase_Stack(std::shared_ptr<ItemStack_C> &inStack)
 {
-    srand(time(NULL));
-    int A[5];
-    for (auto element : A)
+    if (inStack->get_Type() == Type)
     {
-        element = rand() % 1 + 1000;
+        Count += inStack->stack_Size();
     }
-    for (auto element : A)
+    else if (!Type.size())
     {
-        std::cout << element << std::endl;
+        Count = inStack->stack_Size();
+        Type = inStack->get_Type();
     }
-};
+}
+
+void ItemStack_C::decrease_Stack(int count)
+{
+
+}
+

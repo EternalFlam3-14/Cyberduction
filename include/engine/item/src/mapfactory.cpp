@@ -25,7 +25,7 @@ bool MapFactory_C::load()
 
     delete db; // Deletes all Cereal instances
 
-    return has_Error(TypeMap, ItemArrays);
+    return check_Error(TypeMap, ItemArrays);
 }
 
 std::vector<std::vector<std::string>> MapFactory_C::load_Arrays(Cereal::Object* Items)
@@ -36,8 +36,10 @@ std::vector<std::vector<std::string>> MapFactory_C::load_Arrays(Cereal::Object* 
     // Seperate arrays into respective variables
     std::vector<std::vector<std::string>> ItemInfo;
 
+    // ItemNames
     ItemInfo.push_back(ItemArrays[0]->getArray<std::string>());
 
+    // ItemTypes
     ItemInfo.push_back(ItemArrays[1]->getArray<std::string>());
 
     return ItemInfo;
@@ -68,7 +70,7 @@ std::map<std::string, std::string> MapFactory_C::build_Map(Cereal::Object *TypeM
     return ItemTypeMap;
 }
 
-bool MapFactory_C::has_Error(std::map <std::string, std::string> ItemTypeMap, std::vector<std::vector<std::string>> ItemArrays)
+bool MapFactory_C::check_Error(std::map <std::string, std::string> ItemTypeMap, std::vector<std::vector<std::string>> ItemArrays)
 {
     std::vector<std::string> MissingItems, MissingTypes;
 
@@ -90,10 +92,10 @@ bool MapFactory_C::has_Error(std::map <std::string, std::string> ItemTypeMap, st
         }
     }
 
-    // If any missing elements occur, this function returns true
+    // If any missing elements occur, this function returns false
     if (MissingItems.size() || MissingTypes.size())
     {
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }

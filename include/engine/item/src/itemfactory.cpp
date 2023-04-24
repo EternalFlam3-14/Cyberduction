@@ -11,5 +11,5 @@ std::shared_ptr<ItemStack_C> ItemFactory_C::new_Item(int count, std::string item
 
 std::string ItemFactory_C::get_Type(std::string itemname)
 {
-    return ItemMap[itemname];
+    return ItemTypeMap[itemname];
 }

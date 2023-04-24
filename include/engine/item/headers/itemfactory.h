@@ -2,13 +2,14 @@
 #define ITEMFACTORY_H
 
 #include "item.h"
+
 #include "mapfactory.h"
 
 class ItemFactory_C
 {
 public:
 
-    ItemFactory_C(std::map <std::string, std::string> itemmap) : ItemMap(itemmap) {};
+    ItemFactory_C(std::map <std::string, std::string> TypeMap) : ItemTypeMap(TypeMap) {};
 
     std::shared_ptr<ItemStack_C> new_Item(int count, std::string itemname);
 
@@ -16,7 +17,7 @@ public:
 
 private:
 
-    std::map <std::string, std::string> ItemMap;
+    std::map <std::string, std::string> ItemTypeMap;
 
 };
 
