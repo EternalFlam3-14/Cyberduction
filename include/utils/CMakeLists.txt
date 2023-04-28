@@ -14,6 +14,6 @@ aux_source_directory(${ITEMFORGE_SRC_DIR} ITEMFORGE_SRCS)
 
 add_executable(${PROJECT_NAME} ${ITEMFORGE_SRCS})
 
-# target_link_libraries(${PROJECT_NAME} PUBLIC
-#     ${ITEMFORGE_HEADERS_DIR}
-# )
+ target_link_libraries(${PROJECT_NAME} PUBLIC
+    Engine
+ )
