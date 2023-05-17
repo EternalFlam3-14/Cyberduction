@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Cyberduction)
 set(LIB_DIR ${CMAKE_SOURCE_DIR}/include)
 set(ENGINE_DIR ${LIB_DIR}/engine)
-set(UTILS_DIR ${LIB_DIR}/utils)
+set(UTILS_DIR ${LIB_DIR}/tools)
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 set(CEREAL_DIR ${LIB_DIR}/cereal)
 

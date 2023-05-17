@@ -8,22 +8,20 @@ void ItemForge_C::load_Arrays()
     std::vector<std::string> ItemNames(std::views::keys(ItemTypeMap).begin(), std::views::keys(ItemTypeMap).end());
     // Read map values
     std::vector<std::string> ItemValues(std::views::values(ItemTypeMap).begin(), std::views::values(ItemTypeMap).end());
+
     ItemVectors.push_back(ItemNames);
     ItemVectors.push_back(ItemValues);
 }
 
-void ItemForge_C::save_Map()
+bool ItemForge_C::save_Map()
 {
-    auto NameV = std::views::keys(ItemTypeMap);
-    auto TypeV = std::views::values(ItemTypeMap);
+    // Gqther map keys as Names, values as Types
+    std::vector<std::string> ItemNames{ std::views::keys(ItemTypeMap).begin(), std::views::keys(ItemTypeMap).end() },   ItemTypes{ std::views::values(ItemTypeMap).begin(), std::views::values(ItemTypeMap).end() };
 
-    std::vector<std::string> ItemNames{ NameV.begin(), NameV.end() },
-    /*    Keys & Values    */ItemTypes{ TypeV.begin(), TypeV.end() };
-
-    // Build object to store map
+    // Build object to store map, deleted with database (Cereal)
     Cereal::Object* MapObject = new Cereal::Object("TypeMap");
 
-    // Build object to store values
+    // Build object to store values, deleted with database (Cereal)
     Cereal::Object* ItemObject = new Cereal::Object("Items");
 
     for (int i=0; i < ItemNames.size(); i++)
@@ -32,25 +30,32 @@ void ItemForge_C::save_Map()
         MapObject->addField(Newfield);
     }
 
+    // Add the vectors to the item object
     ItemObject->addArray(new Cereal::Array("Names", ItemNames.data(), ItemNames.size()));
     ItemObject->addArray(new Cereal::Array("Types", ItemTypes.data(), ItemTypes.size()));
 
+    // Handlers
     Cereal::Buffer buf(1024);
     Cereal::Database* db = new Cereal::Database("ItemDB");
 
+    // Add objects to database
     db->addObject(MapObject);
     db->addObject(ItemObject);
+
+    // Write database to buffer
     if (!db->write(buf))
     {
         std::cout << "Database failed to write to buffer" << std::endl;
         delete db;
-        return;
+        return false;
     }
+    // Write buffer to file
     if (!buf.writeFile(ItemFile))
     {
         std::cout << "Buffer failed to write to file" << std::endl;
         delete db;
-        return;
+        return false;
     }
     delete db;
+    return true;
 }
