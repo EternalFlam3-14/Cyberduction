@@ -33,7 +33,7 @@ void load(ItemForge_C &Forge)
     ( std::cout << "File loading failed\n" ) ;
 }
 
-void edit_Name(ItemForge_C &Forge, std::map<std::string, std::string>::iterator &pair)
+void edit_Name(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
 {
     std::string input;
     bool edit_complete = false;
@@ -77,7 +77,7 @@ void edit_Name(ItemForge_C &Forge, std::map<std::string, std::string>::iterator 
     } // while(edit_complete) = false
 } // edit_Name
 
-void edit_Type(ItemForge_C &Forge, std::map<std::string, std::string>::iterator &pair)
+void edit_Type(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
 {
     std::string input;
     bool edit_complete = false;

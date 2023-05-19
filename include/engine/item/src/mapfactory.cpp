@@ -65,7 +65,7 @@ void MapFactory_C::build_Map(Cereal::Object *TypeMapObject, std::vector<std::vec
         itemTypes.insert(type);
     }
 
-    std::map <std::string, std::string> ItemTypeMap;
+    std::unordered_map <std::string, std::string> ItemTypeMap;
 
     for (const auto& item : ItemArrays[0])
     {
@@ -84,7 +84,7 @@ void MapFactory_C::build_Map(Cereal::Object *TypeMapObject, std::vector<std::vec
     TypeMap = std::move(ItemTypeMap);
 }
 
-const bool MapFactory_C::check_Error(const std::map <std::string, std::string> &ItemTypeMap, const std::vector<std::vector<std::string>> &ItemArrays)
+const bool MapFactory_C::check_Error(const std::unordered_map <std::string, std::string> &ItemTypeMap, const std::vector<std::vector<std::string>> &ItemArrays)
 {
     // Declare variables & reserve size for performance
     std::vector<std::string> MissingItems, MissingTypes;

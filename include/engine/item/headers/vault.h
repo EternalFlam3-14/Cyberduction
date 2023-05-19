@@ -24,7 +24,7 @@ public:
 private:
 
     std::vector<std::shared_ptr<Slot_C>> Slots;
-    std::unordered_map<std::string, int> SlotTypeIndices;
+    std::unordered_multimap<std::string, int> SlotTypeIndices;
 
 };
 

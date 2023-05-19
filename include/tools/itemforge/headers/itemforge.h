@@ -2,7 +2,7 @@
 #define ITEMFORGE_H
 #include <cereal.h>
 #include <memory>
-#include <map>
+#include <unordered_map>
 #include <string>
 
 class ItemForge_C
@@ -10,7 +10,7 @@ class ItemForge_C
 public:
 
     // Internal map setter
-    void set_Map(std::map<std::string, std::string> existingMap) { ItemTypeMap = existingMap; };
+    void set_Map(std::unordered_map<std::string, std::string> existingMap) { ItemTypeMap = existingMap; };
 
     // Returns the ItemNames and ItemTypes vectors from the database as a 2d vector of strings
     void load_Arrays();
@@ -26,7 +26,7 @@ public:
     // Getter
     const std::vector<std::string> ItemTypes() const { return ItemVectors.at(1); };
     // Getter
-    const std::map<std::string, std::string>& get_Map() const { return ItemTypeMap; };
+    const std::unordered_map<std::string, std::string>& get_Map() const { return ItemTypeMap; };
 
     // Check if element exists in ItemTypeMap
     bool element_Exists(std::string key) { return (ItemTypeMap.find(key) != ItemTypeMap.end()) ? true : false; }
@@ -43,7 +43,7 @@ private:
     std::vector<std::vector<std::string>> ItemVectors;
 
     // ItemName and ItemType pairing
-    std::map<std::string, std::string> ItemTypeMap;
+    std::unordered_map<std::string, std::string> ItemTypeMap;
 
     // Static path to the file
     const std::string ItemFile = "../data/item.db";

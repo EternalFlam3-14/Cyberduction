@@ -2,7 +2,7 @@
 #define ITEMFACTORY_H
 
 
-#include <map>
+#include <unordered_map>
 #include <string>
 
 #include "item.h"
@@ -11,13 +11,13 @@ class ItemFactory_C
 {
 public:
 
-    ItemFactory_C(const std::map<std::string, std::string>& TypeMap) : ItemTypeMap(TypeMap) {};
+    ItemFactory_C(const std::unordered_map<std::string, std::string>& TypeMap) : ItemTypeMap(TypeMap) {};
 
     std::shared_ptr<ItemStack_C> new_Item(int count, const std::string &itemname);
 
 private:
 
-    std::map<std::string, std::string> ItemTypeMap;
+    std::unordered_map<std::string, std::string> ItemTypeMap;
 
 };
 

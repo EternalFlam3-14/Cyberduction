@@ -6,24 +6,54 @@ void Vault_C::add_Slot(std::shared_ptr<Slot_C> &slot)
     Slots.push_back(std::move(slot));
 
     // Update the SlotTypeIndices map with the new slot's type and index
-    SlotTypeIndices[Slots.back()->ItemType()] = Slots.size() - 1;
+    SlotTypeIndices.emplace(Slots.back()->ItemType(), Slots.size() - 1);
 }
 
 const bool Vault_C::add_Item(std::shared_ptr<ItemStack_C> &inStack)
 {
     std::string type(inStack->get_Type());
 
-    // Search the lookup table for an entry
-    auto it = SlotTypeIndices.find(type);
-    if (it == SlotTypeIndices.end())
+    // Count to see if ranges is needed
+    int count = SlotTypeIndices.count(type);
+
+    if (count == 0)
     {
         return false;
     }
+    else if (count == 1)
+    {
+        // Grab entry from lookup table
+        auto it = SlotTypeIndices.find(type);
 
-    // Grab the slot position
-    int slotno = it->second;
+        // Grab the slot position
+        int slotno = it->second;
 
-    Slots[slotno]->increase_Stack(inStack);
+        if (!Slots[slotno]->increase_Stack(inStack))
+        {
+            return false;
+        }
+    }
+    else if (count > 1)
+    {
+        // Gather slots, iterate over and attempt to increase stack
+        auto ranges = SlotTypeIndices.equal_range(type);
+
+        int fails = 0;
+
+        for (auto it = ranges.first; it != ranges.second; ++it)
+        {
+            if (!Slots[it->second]->increase_Stack(inStack))
+            {
+                ++fails;
+                continue;
+            }
+            break;
+        }
+        if (fails == count)
+        {
+            return false;
+        }
+    }
     return true;
 }
 
