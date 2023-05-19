@@ -2,6 +2,7 @@
 #define VAULT_H
 
 #include <string>
+#include <unordered_map>
 #include "slot.h"
 #include "vector"
 
@@ -9,22 +10,21 @@ class Vault_C
 {
 public:
 
-    void add_Slot(std::shared_ptr<Slot_C> slot);
+    void add_Slot(std::shared_ptr<Slot_C> &slot);
 
-    bool add_Item(std::shared_ptr<ItemStack_C> &inStack);
-
-    // Returns position of slot with matching type. Returns -1 if no slot has a matching type
-    int check_Types(std::string type);
+    const bool add_Item(std::shared_ptr<ItemStack_C> &inStack);
 
     // Returns a string of all the items in the vault
-    std::string print_AllSlots();
+    const std::string print_AllSlots();
 
     // Returns a string containing the item in the specified slot
-    std::string print_Slot(int slotno);
+    const std::string print_Slot(int slotno);
 
 
 private:
+
     std::vector<std::shared_ptr<Slot_C>> Slots;
+    std::unordered_map<std::string, int> SlotTypeIndices;
 
 };
 

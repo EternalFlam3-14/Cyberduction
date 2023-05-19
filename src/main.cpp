@@ -1,25 +1,30 @@
 #include <iostream>
 #include <vault.h>
+#include <mapfactory.h>
+#include <itemfactory.h>
 
 void generalTest()
 {
+    MapFactory_C MapFactory;
+
+    if (!MapFactory.load(MapFactory.MainItemFile()))
+    {
+        std::cout << "Item loading failed";
+        return;
+    }
+
+    ItemFactory_C ItemFactory_C(MapFactory.Map());
+    
     Vault_C Vault;
 
-    Vault.add_Slot(std::make_shared<Slot_C> (ItemStack_C("iron_ingot", "raw_ore", 10)));
+    auto itemname = "iron_ore";
+    auto item = ItemFactory_C.new_Item(10, itemname);
+    auto slot = std::make_shared<Slot_C> (item);
+    
+    Vault.add_Slot(slot);
 
-    Vault.add_Slot(std::make_shared<Slot_C> ("processed_crop"));
+    std::cout << Vault.print_AllSlots() << std::endl;
 
-    ItemStack_C item("flour", "processed_crop", 69);
-
-    std::shared_ptr<ItemStack_C> Stack = std::make_shared<ItemStack_C>(item);
-
-    if (Vault.add_Item(Stack))
-    {
-        std::cout << Vault.print_AllSlots() << std::endl;
-    }
-    else{
-        std::cout << "rejected" << std::endl;
-    }
 
 }
 

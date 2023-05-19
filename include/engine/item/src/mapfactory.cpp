@@ -1,9 +1,10 @@
 #include "mapfactory.h"
 #include <algorithm>
+#include <unordered_set>
 #include <iostream>
 #include <ranges>
 
-bool MapFactory_C::load(std::string Filename)
+const bool MapFactory_C::load(const std::string &Filename)
 {
     // Read file into buffer
     Cereal::Buffer buf(1024);
@@ -39,12 +40,13 @@ bool MapFactory_C::load(std::string Filename)
 
 std::vector<std::vector<std::string>> MapFactory_C::load_Arrays(Cereal::Object* Items)
 {
-    // Gather arrays from object
     std::vector<Cereal::Array*> ItemArrays = Items->getArrays(); 
     
-    // Seperate arrays into respective variables
     std::vector<std::vector<std::string>> ItemInfo;
 
+    // Set ItemInfo size to whichever array is larger
+    ItemInfo.reserve(std::max(ItemArrays[0]->getSize(), ItemArrays[1]->getSize()));
+    
     // ItemNames
     ItemInfo.push_back(ItemArrays[0]->getArray<std::string>());
 
@@ -56,65 +58,68 @@ std::vector<std::vector<std::string>> MapFactory_C::load_Arrays(Cereal::Object* 
 
 void MapFactory_C::build_Map(Cereal::Object *TypeMapObject, std::vector<std::vector<std::string>> ItemArrays)
 {
+    std::unordered_set<std::string> itemTypes;
+
+    for (const auto& type : ItemArrays[1])
+    {
+        itemTypes.insert(type);
+    }
 
     std::map <std::string, std::string> ItemTypeMap;
 
-    for (auto Item : ItemArrays[0])
+    for (const auto& item : ItemArrays[0])
     {
-        // Item's paired type
-        std::string Type;
-        
         // Fetch the string under the name of the current item
-        Type = TypeMapObject->getField(Item)->getValue<std::string>();
+        std::string type = TypeMapObject->getField(item)->getValue<std::string>();
 
-        // Error if the paired type cannot be found in the Item Type array
-        if (std::find(ItemArrays[1].begin(), ItemArrays[1].end(), Type) == ItemArrays[1].end())
+        // Check if the paired type cannot be found in the item type set
+        if (itemTypes.find(type) == itemTypes.end())
         {
             continue;
         }
 
-        // Store the pair into the map with the item as the key
-        ItemTypeMap.emplace(std::pair<std::string, std::string> (Item, Type));
+        // Store the pair into the map with the item as the key and type as the value
+        ItemTypeMap.emplace(std::pair<std::string, std::string> (item, type));
     }
-    TypeMap = ItemTypeMap;
+    TypeMap = std::move(ItemTypeMap);
 }
 
-bool MapFactory_C::check_Error(std::map <std::string, std::string> ItemTypeMap, std::vector<std::vector<std::string>> ItemArrays)
+const bool MapFactory_C::check_Error(const std::map <std::string, std::string> &ItemTypeMap, const std::vector<std::vector<std::string>> &ItemArrays)
 {
+    // Declare variables & reserve size for performance
     std::vector<std::string> MissingItems, MissingTypes;
+    MissingItems.reserve(ItemArrays[0].size());
+    MissingTypes.reserve(ItemArrays[1].size());
 
-    // First check that all items exist in the Map
-    for (auto Item : ItemArrays[0])
+    // Check that all items exist in the Map
+    for (const auto& item : ItemArrays[0])
     {
-        if (ItemTypeMap.find(Item) == ItemTypeMap.end())
-            {
-                MissingItems.push_back(Item);
-            }
+        if (ItemTypeMap.count(item) == 0)
+        {
+            MissingItems.push_back(item);
+        }
     }
-    for (auto missing : MissingItems)
+    for (const auto& missing : MissingItems)
     {
         std::cout << missing << std::endl;
     }
 
+    // Gather all types
+    const auto& itemTypes = std::views::values(ItemTypeMap);
 
-    std::vector<std::string> Types(std::views::values(ItemTypeMap).begin(),std::views::values(ItemTypeMap).end());
-    // Then, check that all types exist in the Map
-    for (auto Type : ItemArrays[1])
+    // Check that all types exist in the Map
+    for (const auto& type : ItemArrays[1])
     {
-        if(std::find(std::views::values(ItemTypeMap).begin(), std::views::values(ItemTypeMap).end(), Type) == std::views::values(ItemTypeMap).end())
+        if (std::find(itemTypes.begin(), itemTypes.end(), type) == itemTypes.end())
         {
-            MissingTypes.push_back(Type);
+            MissingTypes.push_back(type);
         }
     }
-    for (auto missing : MissingTypes)
+    for (const auto& missing : MissingTypes)
     {
         std::cout << missing << std::endl;
     }
 
     // If any missing elements occur, this function returns false
-    if (MissingItems.size() || MissingTypes.size())
-    {
-        return false;
-    }
-    return true;
+    return MissingItems.empty() && MissingTypes.empty();
 }

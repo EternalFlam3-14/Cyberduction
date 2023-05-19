@@ -1,45 +1,41 @@
 #include "vault.h"
 #include <iostream>
 
-void Vault_C::add_Slot(std::shared_ptr<Slot_C> slot)
+void Vault_C::add_Slot(std::shared_ptr<Slot_C> &slot)
 {
-    Slots.push_back(slot);
+    Slots.push_back(std::move(slot));
+
+    // Update the SlotTypeIndices map with the new slot's type and index
+    SlotTypeIndices[Slots.back()->ItemType()] = Slots.size() - 1;
 }
 
-bool Vault_C::add_Item(std::shared_ptr<ItemStack_C> &inStack)
+const bool Vault_C::add_Item(std::shared_ptr<ItemStack_C> &inStack)
 {
     std::string type(inStack->get_Type());
-    int slotno = check_Types(type);
-    if (slotno == -1)
+
+    // Search the lookup table for an entry
+    auto it = SlotTypeIndices.find(type);
+    if (it == SlotTypeIndices.end())
     {
-        return 0;
+        return false;
     }
-    std::cout << inStack->stack_Size() << std::endl;
+
+    // Grab the slot position
+    int slotno = it->second;
+
     Slots[slotno]->increase_Stack(inStack);
-    return 1;
-
+    return true;
 }
 
-int Vault_C::check_Types(std::string type)
-{
-    for (int i(0); i < Slots.size(); i++)
-    {
-        if (Slots[i]->ItemType() == type)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
-std::string Vault_C::print_AllSlots()
+const std::string Vault_C::print_AllSlots()
 {
     std::string output;
     for (int i(0); i < Slots.size(); i++)
     {
         output.append(print_Slot(i));
 
-        if ((i+1) != Slots.size()) // Only add a newline if there are more elements
+        // Only add a newline if there are more elements
+        if ((i+1) != Slots.size()) 
         {
             output.append("\n");
         }
@@ -48,19 +44,18 @@ std::string Vault_C::print_AllSlots()
 }
 
 
-std::string Vault_C::print_Slot(int slotno)
+const std::string Vault_C::print_Slot(int slotno)
 {
-    if (Slots[slotno]->ItemType().empty()) // Check Item Type
+    if (Slots[slotno]->ItemType().empty()) // If the type's string is ""
     {
         return "empty type";
     }
-    if (!Slots[slotno]->stack_Size()) // Check Stack Size
+    if (!Slots[slotno]->stack_Size()) // If stack is empty
     {
         return "empty slot";
     }
 
     return Slots[slotno]->ItemType() + " " + std::to_string(Slots[slotno]->stack_Size());
-
 }
 
 

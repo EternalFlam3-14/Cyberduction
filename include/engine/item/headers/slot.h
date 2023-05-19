@@ -3,21 +3,19 @@
 
 #include "item.h"
 
-
 class Slot_C
 {
 public:
 
-    Slot_C() {;};
     Slot_C(std::string type) : Type(type) {};
-    Slot_C(ItemStack_C stack) : Stack(std::make_shared<ItemStack_C> (stack)), Type(stack.get_Type()) {};
+    Slot_C(std::shared_ptr<ItemStack_C> &stack) : Stack(stack), Type(stack->get_Type()) {};
 
     // Return the Slot's type
-    std::string ItemType() { return Type; };
+    const std::string ItemType() const { return Type; };
 
-    int stack_Size() const { return Stack->stack_Size(); };
+    const int stack_Size() const { return Stack->stack_Size(); };
 
-    bool increase_Stack(std::shared_ptr<ItemStack_C> &inStack);
+    const bool increase_Stack(std::shared_ptr<ItemStack_C> &inStack);
 
 private:
 

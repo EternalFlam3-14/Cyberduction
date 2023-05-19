@@ -2,7 +2,7 @@
 
 
 
-bool Slot_C::increase_Stack(std::shared_ptr<ItemStack_C> &inStack)
+const bool Slot_C::increase_Stack(std::shared_ptr<ItemStack_C> &inStack)
 {
     if (Stack)
     {
