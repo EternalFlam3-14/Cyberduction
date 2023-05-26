@@ -7,7 +7,7 @@ class Slot_C
 {
 public:
 
-    Slot_C(std::string type) : Type(type) {};
+    Slot_C(const std::string &type) : Type(type) {};
     Slot_C(std::shared_ptr<ItemStack_C> &stack) : Stack(stack), Type(stack->get_Type()) {};
 
     // Return the Slot's type
