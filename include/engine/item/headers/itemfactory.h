@@ -11,9 +11,9 @@ class ItemFactory_C
 {
 public:
 
-    ItemFactory_C(const std::unordered_map<std::string, std::string>& TypeMap) : ItemTypeMap(TypeMap) {};
+    ItemFactory_C(const std::unordered_map<std::string, std::string> &TypeMap) : ItemTypeMap(TypeMap) {};
 
-    std::shared_ptr<ItemStack_C> new_Item(int count, const std::string &itemname);
+    std::shared_ptr<ItemStack_C> new_Item(int count, const std::string &itemID);
 
 private:
 

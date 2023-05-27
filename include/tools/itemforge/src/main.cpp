@@ -33,13 +33,13 @@ void load(ItemForge_C &Forge)
     ( std::cout << "File loading failed\n" ) ;
 }
 
-void edit_Name(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
+void edit_ID(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
 {
     std::string input;
     bool edit_complete = false;
     while (!edit_complete)
     {
-        std::cout << "What should the new name be?\n";
+        std::cout << "What should the new ID be?\n";
         std::string name; std::cin >> name;
 
         std::cout << name << ", correct? YES / NO / EXIT\n";
@@ -75,7 +75,7 @@ void edit_Name(ItemForge_C &Forge, std::unordered_map<std::string, std::string>:
             } // case
         } // switch
     } // while(edit_complete) = false
-} // edit_Name
+} // edit_ID
 
 void edit_Type(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
 {
@@ -163,7 +163,7 @@ void edit(ItemForge_C &Forge)
             }
             case "name"_:
             {
-                edit_Name(Forge, pair);
+                edit_ID(Forge, pair);
                 exit = true;
                 break;
             } // case
@@ -196,18 +196,18 @@ int main()
         {
             case "new"_:
             {
-                std::string ItemName, ItemType;
+                std::string ID, ItemType;
 
                 std::cout << "Enter the item's name\n";
-                std::cin >> ItemName;
+                std::cin >> ID;
 
                 std::cout << "Enter the item's type\n";
                 std::cin >> ItemType;
 
-                std::pair<std::string, std::string> newpair(ItemName, ItemType);
+                std::pair<std::string, std::string> newpair(ID, ItemType);
                 Forge.add_Pair(newpair);
 
-                std::cout << ItemName << " " << Forge.get_Map().at(ItemName) << '\n';
+                std::cout << ID << " " << Forge.get_Map().at(ID) << '\n';
                 break;
             } // case
             case "edit"_:

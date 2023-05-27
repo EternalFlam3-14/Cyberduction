@@ -12,7 +12,7 @@ public:
     // Internal map setter
     void set_Map(std::unordered_map<std::string, std::string> existingMap) { ItemTypeMap = existingMap; };
 
-    // Returns the ItemNames and ItemTypes vectors from the database as a 2d vector of strings
+    // Returns the IDs and ItemTypes vectors from the database as a 2d vector of strings
     void load_Arrays();
 
     // Save the internal map to file
@@ -22,7 +22,7 @@ public:
     void add_Pair(std::pair<std::string, std::string> input) { ItemTypeMap.emplace(input); };
 
     // Getter
-    const std::vector<std::string> ItemNames() const { return ItemVectors.at(0); };
+    const std::vector<std::string> IDs() const { return ItemVectors.at(0); };
     // Getter
     const std::vector<std::string> ItemTypes() const { return ItemVectors.at(1); };
     // Getter
@@ -39,10 +39,10 @@ public:
 
 private:
 
-    // ItemNames as the first vector, ItemTypes as the second vector, expandable as needed
+    // IDs as the first vector, ItemTypes as the second vector, expandable as needed
     std::vector<std::vector<std::string>> ItemVectors;
 
-    // ItemName and ItemType pairing
+    // ID and ItemType pairing
     std::unordered_map<std::string, std::string> ItemTypeMap;
 
     // Static path to the file

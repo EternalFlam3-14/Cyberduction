@@ -3,8 +3,8 @@
 
 #include "itemfactory.h"
 
-std::shared_ptr<ItemStack_C> ItemFactory_C::new_Item(int count, const std::string &itemname)
+std::shared_ptr<ItemStack_C> ItemFactory_C::new_Item(int count, const std::string &itemID)
 {
-    return std::make_shared<ItemStack_C> (itemname, ItemTypeMap[itemname], count);
+    return std::make_shared<ItemStack_C> (itemID, ItemTypeMap[itemID], count);
 
 }

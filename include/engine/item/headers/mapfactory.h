@@ -26,7 +26,7 @@ public:
 
 private:
 
-    // Returns the ItemNames and ItemTypes vectors from the database as a 2d vector of strings
+    // Returns the IDs and ItemTypes vectors from the database as a 2d vector of strings
     std::vector<std::vector<std::string>> load_Arrays(Cereal::Object* Items);
 
     // Self explainatory

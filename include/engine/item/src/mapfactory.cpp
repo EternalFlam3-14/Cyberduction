@@ -29,7 +29,7 @@ const bool MapFactory_C::load(const std::string &Filename)
     {
         return false;
     }
-    // Contains ItemNames and Types, [0] and [1] respectively
+    // Contains IDs and Types, [0] and [1] respectively
     auto ItemArrays = load_Arrays(ItemsObject);
 
     // The map is loaded in from the Cereal Object
@@ -47,7 +47,7 @@ std::vector<std::vector<std::string>> MapFactory_C::load_Arrays(Cereal::Object* 
     // Set ItemInfo size to whichever array is larger
     ItemInfo.reserve(std::max(ItemArrays[0]->getSize(), ItemArrays[1]->getSize()));
     
-    // ItemNames
+    // IDs
     ItemInfo.push_back(ItemArrays[0]->getArray<std::string>());
 
     // ItemTypes
