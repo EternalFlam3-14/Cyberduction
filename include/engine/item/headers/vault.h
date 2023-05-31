@@ -6,13 +6,13 @@
 #include "slot.h"
 #include "vector"
 
-class Vault_C
+class Vault
 {
 public:
 
-    void add_Slot(std::shared_ptr<Slot_C> &slot);
+    void add_Slot(std::shared_ptr<Slot> &slot);
 
-    const bool add_Item(std::shared_ptr<ItemStack_C> &inStack);
+    const bool add_Item(std::shared_ptr<ItemStack> &inStack);
 
     // Returns a string of all the items in the vault
     const std::string print_AllSlots();
@@ -23,7 +23,7 @@ public:
 
 private:
 
-    std::vector<std::shared_ptr<Slot_C>> Slots;
+    std::vector<std::shared_ptr<Slot>> Slots;
     std::unordered_multimap<std::string, int> SlotTypeIndices;
 
 };

@@ -7,7 +7,7 @@
 #include <vector>
 #include <Cereal.h>
 
-class MapFactory_C
+class MapFactory
 {
 public:
 

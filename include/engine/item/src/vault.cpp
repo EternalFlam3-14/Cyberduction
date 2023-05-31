@@ -1,7 +1,7 @@
 #include "vault.h"
 #include <iostream>
 
-void Vault_C::add_Slot(std::shared_ptr<Slot_C> &slot)
+void Vault::add_Slot(std::shared_ptr<Slot> &slot)
 {
     Slots.push_back(std::move(slot));
 
@@ -9,7 +9,7 @@ void Vault_C::add_Slot(std::shared_ptr<Slot_C> &slot)
     SlotTypeIndices.emplace(Slots.back()->ItemType(), Slots.size() - 1);
 }
 
-const bool Vault_C::add_Item(std::shared_ptr<ItemStack_C> &inStack)
+const bool Vault::add_Item(std::shared_ptr<ItemStack> &inStack)
 {
     std::string type(inStack->get_Type());
 
@@ -57,7 +57,7 @@ const bool Vault_C::add_Item(std::shared_ptr<ItemStack_C> &inStack)
     return true;
 }
 
-const std::string Vault_C::print_AllSlots()
+const std::string Vault::print_AllSlots()
 {
     std::string output;
     for (int i(0); i < Slots.size(); i++)
@@ -74,7 +74,7 @@ const std::string Vault_C::print_AllSlots()
 }
 
 
-const std::string Vault_C::print_Slot(int slotno)
+const std::string Vault::print_Slot(int slotno)
 {
     if (Slots[slotno]->ItemType().empty()) // If the type's string is ""
     {

@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <string>
 
-class ItemForge_C
+class ItemForge
 {
 public:
 

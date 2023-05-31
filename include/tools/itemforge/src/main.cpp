@@ -24,16 +24,16 @@ std::string UserInput()
     return input;
 }
 
-void load(ItemForge_C &Forge)
+void load(ItemForge &Forge)
 {
-    MapFactory_C Factory;
+    MapFactory Factory;
 
     Factory.load(Factory.AuxItemFile()) ? 
     ( Forge.set_Map(Factory.Map()), Forge.load_Arrays(), std::cout << "File loaded\n" ) :
     ( std::cout << "File loading failed\n" ) ;
 }
 
-void edit_ID(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
+void edit_ID(ItemForge &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
 {
     std::string input;
     bool edit_complete = false;
@@ -77,7 +77,7 @@ void edit_ID(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::i
     } // while(edit_complete) = false
 } // edit_ID
 
-void edit_Type(ItemForge_C &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
+void edit_Type(ItemForge &Forge, std::unordered_map<std::string, std::string>::iterator &pair)
 {
     std::string input;
     bool edit_complete = false;
@@ -122,7 +122,7 @@ void edit_Type(ItemForge_C &Forge, std::unordered_map<std::string, std::string>:
     } // while(edit_complete) = false
 } // edit_Type
 
-void edit(ItemForge_C &Forge)
+void edit(ItemForge &Forge)
 {
     bool exit = false;
     while (!exit)
@@ -183,7 +183,7 @@ void edit(ItemForge_C &Forge)
 
 int main()
 {
-    ItemForge_C Forge;
+    ItemForge Forge;
     bool end = false;
 
     if (file_Load())

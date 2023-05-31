@@ -9,7 +9,7 @@ void generalTest()
 {
     srand (time(NULL));
 
-    MapFactory_C MapFactory;
+    MapFactory MapFactory;
 
     if (!MapFactory.load(MapFactory.MainItemFile()))
     {
@@ -17,13 +17,13 @@ void generalTest()
         return;
     }
 
-    ItemFactory_C ItemFactory(MapFactory.Map());
+    ItemFactory ItemFactory(MapFactory.Map());
     
-    Vault_C Vault;
+    Vault Vault;
 
     auto itemname = "iron_ore";
     auto item = ItemFactory.new_Item(10, itemname);
-    auto slot = std::make_shared<Slot_C> (item);
+    auto slot = std::make_shared<Slot> (item);
     
     Vault.add_Slot(slot);
 
@@ -37,7 +37,7 @@ void generalTest()
 
     item = ItemFactory.new_Item(rand() % 100 + 1, aluminum_item);
 
-    auto newSlot = std::make_shared<Slot_C> (item);
+    auto newSlot = std::make_shared<Slot> (item);
 
     Vault.add_Slot(newSlot);
 

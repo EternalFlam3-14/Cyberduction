@@ -5,14 +5,14 @@
 #include <memory>
 
 
-class ItemStack_C
+class ItemStack
 {
 public:
 
-    ItemStack_C() : Count(0) {};
-    ItemStack_C(const std::string &itemID, const std::string &itemtype, const int &count) : ID(itemID), Count(count), Type(itemtype) {};
+    ItemStack() : Count(0) {};
+    ItemStack(const std::string &itemID, const std::string &itemtype, const int &count) : ID(itemID), Count(count), Type(itemtype) {};
 
-    void increase_Stack(std::shared_ptr<ItemStack_C> &inStack);
+    void increase_Stack(std::shared_ptr<ItemStack> &inStack);
 
     void decrease_Stack(int count);
 

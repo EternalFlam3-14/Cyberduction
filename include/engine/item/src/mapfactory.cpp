@@ -4,7 +4,7 @@
 #include <iostream>
 #include <ranges>
 
-const bool MapFactory_C::load(const std::string &Filename)
+const bool MapFactory::load(const std::string &Filename)
 {
     // Read file into buffer
     Cereal::Buffer buf(1024);
@@ -38,7 +38,7 @@ const bool MapFactory_C::load(const std::string &Filename)
     return check_Error(TypeMap, ItemArrays);
 }
 
-std::vector<std::vector<std::string>> MapFactory_C::load_Arrays(Cereal::Object* Items)
+std::vector<std::vector<std::string>> MapFactory::load_Arrays(Cereal::Object* Items)
 {
     std::vector<Cereal::Array*> ItemArrays = Items->getArrays(); 
     
@@ -56,7 +56,7 @@ std::vector<std::vector<std::string>> MapFactory_C::load_Arrays(Cereal::Object* 
     return ItemInfo;
 }
 
-void MapFactory_C::build_Map(Cereal::Object *TypeMapObject, std::vector<std::vector<std::string>> ItemArrays)
+void MapFactory::build_Map(Cereal::Object *TypeMapObject, std::vector<std::vector<std::string>> ItemArrays)
 {
     std::unordered_set<std::string> itemTypes;
 
@@ -84,7 +84,7 @@ void MapFactory_C::build_Map(Cereal::Object *TypeMapObject, std::vector<std::vec
     TypeMap = std::move(ItemTypeMap);
 }
 
-const bool MapFactory_C::check_Error(const std::unordered_map <std::string, std::string> &ItemTypeMap, const std::vector<std::vector<std::string>> &ItemArrays)
+const bool MapFactory::check_Error(const std::unordered_map <std::string, std::string> &ItemTypeMap, const std::vector<std::vector<std::string>> &ItemArrays)
 {
     // Declare variables & reserve size for performance
     std::vector<std::string> MissingItems, MissingTypes;

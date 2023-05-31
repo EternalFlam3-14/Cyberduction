@@ -2,7 +2,7 @@
 #include <ranges>
 #include <iostream>
 
-void ItemForge_C::load_Arrays()
+void ItemForge::load_Arrays()
 {
     // Read map keys
     std::vector<std::string> IDs(std::views::keys(ItemTypeMap).begin(), std::views::keys(ItemTypeMap).end());
@@ -13,7 +13,7 @@ void ItemForge_C::load_Arrays()
     ItemVectors.push_back(ItemValues);
 }
 
-bool ItemForge_C::save_Map()
+bool ItemForge::save_Map()
 {
     // Gather map keys as IDs, values as Types
     std::vector<std::string> IDs{ std::views::keys(ItemTypeMap).begin(), std::views::keys(ItemTypeMap).end() },   ItemTypes{ std::views::values(ItemTypeMap).begin(), std::views::values(ItemTypeMap).end() };

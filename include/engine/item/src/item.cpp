@@ -1,7 +1,7 @@
 #include "item.h"
 
 
-void ItemStack_C::increase_Stack(std::shared_ptr<ItemStack_C> &inStack)
+void ItemStack::increase_Stack(std::shared_ptr<ItemStack> &inStack)
 {
     if (inStack->get_Type() == Type)
     {
@@ -14,7 +14,7 @@ void ItemStack_C::increase_Stack(std::shared_ptr<ItemStack_C> &inStack)
     }
 }
 
-void ItemStack_C::decrease_Stack(int count)
+void ItemStack::decrease_Stack(int count)
 {
 
 }
